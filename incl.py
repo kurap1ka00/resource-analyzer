@@ -61,9 +61,9 @@ class SystemMonitor():
         os.system("cls" if os.name == "nt" else "clear")
         print("\t\tSystem Information:")
         
-        print(f"Virtual Memory Usage:", self.state["memory_usage"], "%")
-        print(f"Swap Memory Usage: ", self.state["swap_usage"], "%")
-        print(f"CPU Usage: ", self.state["cpu_usage"], "%")
+        print(f"Virtual Memory Usage:{self.state["memory_usage"]}%",end='\r')
+        print(f"Swap Memory Usage: {self.state["swap_usage"]}%", end='\r')
+        print(f"CPU Usage: {self.state["cpu_usage"]}%",end='\r')
         print("Disk Usage:")
         for partition, usage in self.state["disk_usage"]:
             print(f"{partition}: {usage:.2f}%")
