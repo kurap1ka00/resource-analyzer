@@ -15,15 +15,12 @@ class SystemMonitor():
     default_state_ram = []
 
     def __init__(self):
-        nvmlInit()
-        self.gpu_info = nvmlDeviceGetMemoryInfo(nvmlDeviceGetHandleByIndex(0))
-        self.state = {"gpu_memory_usage": 0, "memory_usage": 0, "swap_usage": 0,
+        
+        self.state = { "memory_usage": 0, "swap_usage": 0,
                       "cpu_usage": 0, "disk_usage": 0}  # Словарь для хранения состояния
         self.default_state_ram = self.get_disk_usage()
 
-    def get_gpu_memory_usage(self):
-        return (self.gpu_info.used / self.gpu_info.total) * 100
-
+    
     def get_memory_usage(self):
         return psutil.virtual_memory()[2]
 
@@ -41,7 +38,7 @@ class SystemMonitor():
         return disk_info
 
     def save_state(self, filename="system_state.json"):
-        self.state["gpu_memory_usage"] = self.get_gpu_memory_usage()
+        
         self.state["memory_usage"] = self.get_memory_usage()
         self.state["swap_usage"] = self.get_swap_usage()
         self.state["cpu_usage"] = self.get_cpu_usage()
@@ -63,7 +60,7 @@ class SystemMonitor():
         self.load_state(filename=filename)
         os.system("cls" if os.name == "nt" else "clear")
         print("\t\tSystem Information:")
-        print(f"GPU Memory Usage:", self.state["gpu_memory_usage"], " %")
+        
         print(f"Virtual Memory Usage:", self.state["memory_usage"], "%")
         print(f"Swap Memory Usage: ", self.state["swap_usage"], "%")
         print(f"CPU Usage: ", self.state["cpu_usage"], "%")
@@ -78,7 +75,7 @@ class SystemMonitor():
         os.system("cls" if os.name == "nt" else "clear")
         print("\t\tSystem Information:")
 
-        print(f"GPU Memory Usage: {self.get_gpu_memory_usage():.2f}%")
+        
         print(f"Virtual Memory Usage: {self.get_memory_usage():.2f}%")
         print(f"Swap Memory Usage: {self.get_swap_usage():.2f}%")
         print(f"CPU Usage: {self.get_cpu_usage():.2f}%")
