@@ -24,7 +24,6 @@ if __name__ == "__main__":
     monitor = SystemMonitor()
     kb = keybrd.KBHit()
     while 1:
-        th = threading.Thread(target=monitor.display_info)
         th1 = threading.Thread(target=inp)
 
         str = ""
@@ -36,13 +35,13 @@ if __name__ == "__main__":
             str += f"{partition}: {monitor.default_state_ram[i][1] - usage:.2f}%\n"
             i += 1
         print(
-            f"""\r\t\tSystem Information:
+            f"""\rSystem Information:
 Virtual Memory Usage: {monitor.get_memory_usage():.2f}%
 Swap Memory Usage: {monitor.get_swap_usage():.2f}%
 CPU Usage: {monitor.get_cpu_usage():.2f}%
 Disk Usage:
 {str}
-Commands:\t [q]-Quit\t [s]-Save state\t [r]-Return state\n\r""", end="\r", flush=True)
+Commands: [q]-Quit [s]-Save state [r]-Return state""", end="\n")
         press = False
         key = 0
         if (kb.kbhit()):
