@@ -2,7 +2,6 @@
 import os
 
 import psutil
-from pynvml import *
 import json
 
 import keyboard as k
@@ -15,12 +14,11 @@ class SystemMonitor():
     default_state_ram = []
 
     def __init__(self):
-        
-        self.state = { "memory_usage": 0, "swap_usage": 0,
+
+        self.state = {"memory_usage": 0, "swap_usage": 0,
                       "cpu_usage": 0, "disk_usage": 0}  # Словарь для хранения состояния
         self.default_state_ram = self.get_disk_usage()
 
-    
     def get_memory_usage(self):
         return psutil.virtual_memory()[2]
 
@@ -38,7 +36,7 @@ class SystemMonitor():
         return disk_info
 
     def save_state(self, filename="system_state.json"):
-        
+
         self.state["memory_usage"] = self.get_memory_usage()
         self.state["swap_usage"] = self.get_swap_usage()
         self.state["cpu_usage"] = self.get_cpu_usage()
@@ -60,35 +58,18 @@ class SystemMonitor():
         self.load_state(filename=filename)
         os.system("cls" if os.name == "nt" else "clear")
         print("\t\tSystem Information:")
-        
-        print(f"Virtual Memory Usage:{self.state["memory_usage"]}%",end='\r')
-        print(f"Swap Memory Usage: {self.state["swap_usage"]}%", end='\r')
-        print(f"CPU Usage: {self.state["cpu_usage"]}%",end='\r')
-        print("Disk Usage:")
-        for partition, usage in self.state["disk_usage"]:
-            print(f"{partition}: {usage:.2f}%")
-        print("[q] - Quit")
+
+        print(
+            f"""Virtual Memory Usage:{self.state['memory_usage']}%\n
+            Swap Memory Usage: {self.state['swap_usage']}%\n
+            CPU Usage: {self.state['cpu_usage']}%
+            Disk Usage:""", end='\r')
+        print("\n")
+        for partition, usage in self.state['disk_usage']:
+            print(f"\n\n\n\n\n{partition}: {usage:.2f}%", end='\r')
+        print("[q] - Quit", end='\r')
         while input(":") != 'q':
             print("Error input")
-
-    def display_info(self):
-        os.system("cls" if os.name == "nt" else "clear")
-        print("\t\tSystem Information:")
-
-        
-        print(f"Virtual Memory Usage: {self.get_memory_usage():.2f}%")
-        print(f"Swap Memory Usage: {self.get_swap_usage():.2f}%")
-        print(f"CPU Usage: {self.get_cpu_usage():.2f}%")
-        print("Disk Usage:")
-        for partition, usage in self.get_disk_usage():
-            print(f"{partition}: {usage:.2f}%")
-        print("Disk changes:")
-        i = 0
-        for partition, usage in self.get_disk_usage():
-            print(
-                f"{partition}: {self.default_state_ram[i][1] - usage:.2f}%")
-            i += 1
-        print("Commands:\t [q]-Quit\t [s]-Save state\t [r]-Return state")
 
 
 def set_terminal_size(columns, lines):
