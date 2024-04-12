@@ -60,10 +60,7 @@ class SystemMonitor():
         print("\t\tSystem Information:")
 
         print(
-            f"""Virtual Memory Usage:{self.state['memory_usage']}%\n
-            Swap Memory Usage: {self.state['swap_usage']}%\n
-            CPU Usage: {self.state['cpu_usage']}%
-            Disk Usage:""", end='\r')
+            """Virtual Memory Usage:{self.state['memory_usage']}%\nSwap Memory Usage: {self.state['swap_usage']}%\nCPU Usage: {self.state['cpu_usage']}%\nDisk Usage:""", end='\r')
         print("\n")
         for partition, usage in self.state['disk_usage']:
             print(f"\n\n\n\n\n{partition}: {usage:.2f}%", end='\r')

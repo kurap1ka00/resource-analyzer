@@ -23,25 +23,21 @@ def inp():
 if __name__ == "__main__":
     monitor = SystemMonitor()
     kb = keybrd.KBHit()
+    print("Commands: [q]-Quit [s]-Save state [r]-Return state")
+    print("     Memory Usage     Usage Swap       CPU Usage              Disk Usage                       Disk changes  ", end="\n")
     while 1:
         th1 = threading.Thread(target=inp)
 
         str = ""
         for partition, usage in monitor.get_disk_usage():
-            str += f"{partition}: {usage:.2f}%\n"
-        str += "Disk changes:\n"
+            str += f"{partition}: {usage:.2f}%\t"
+
         i = 0
         for partition, usage in monitor.get_disk_usage():
-            str += f"{partition}: {monitor.default_state_ram[i][1] - usage:.2f}%\n"
+            str += f"{partition}: {monitor.default_state_ram[i][1] - usage:.2f}%\t"
             i += 1
-        print(
-            f"""\rSystem Information:
-Virtual Memory Usage: {monitor.get_memory_usage():.2f}%
-Swap Memory Usage: {monitor.get_swap_usage():.2f}%
-CPU Usage: {monitor.get_cpu_usage():.2f}%
-Disk Usage:
-{str}
-Commands: [q]-Quit [s]-Save state [r]-Return state""", end="\n")
+        print("\t", monitor.get_memory_usage(), "%\t\t", monitor.get_swap_usage(), "%\t\t",
+              monitor.get_cpu_usage(), "%\t\t", str, end="\r")
         press = False
         key = 0
         if (kb.kbhit()):
@@ -54,5 +50,5 @@ Commands: [q]-Quit [s]-Save state [r]-Return state""", end="\n")
                 monitor.save_state(input("Filename:"))
             if (key == 114 or key == 170 or key == 82 or key == 138):
                 monitor.display_ret_info(input("Filename:"))
-        time.sleep(0.02)
+        time.sleep(0.2)
         # os.system("cls" if os.name == "nt" else "clear")
