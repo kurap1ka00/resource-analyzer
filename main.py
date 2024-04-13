@@ -40,7 +40,12 @@ if __name__ == "__main__":
                 exit()
             if (key == 115 or key == 235 or key == 83 or key == 155):
                 monitor.save_state(input("Filename:"))
+                print("Commands: [q]-Quit [s]-Save state [r]-Return state")
+                print("     Memory Usage     Usage Swap       CPU Usage              Disk Usage                       Disk changes  ", end="\n")
             if (key == 114 or key == 170 or key == 82 or key == 138):
                 monitor.display_ret_info(input("Filename:"))
+                
+                print("Commands: [q]-Quit [s]-Save state [r]-Return state")
+                print("     Memory Usage     Usage Swap       CPU Usage              Disk Usage                       Disk changes  ", end="\n")
         time.sleep(0.2)
         # os.system("cls" if os.name == "nt" else "clear")
