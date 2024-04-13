@@ -1,6 +1,5 @@
 from incl import SystemMonitor
 import os
-import threading
 import time
 import keybrd
 state = ''
@@ -13,20 +12,13 @@ def set_terminal_size(columns, lines):
     except Exception as e:
         print(f"Ошибка при изменении размера терминала: {e}")
 
-
-def inp():
-    global st
-
-    st = input()
-
-
 if __name__ == "__main__":
     monitor = SystemMonitor()
     kb = keybrd.KBHit()
     print("Commands: [q]-Quit [s]-Save state [r]-Return state")
     print("     Memory Usage     Usage Swap       CPU Usage              Disk Usage                       Disk changes  ", end="\n")
     while 1:
-        th1 = threading.Thread(target=inp)
+        
 
         str = ""
         for partition, usage in monitor.get_disk_usage():
