@@ -26,7 +26,7 @@ jobs:
 
     - name: Run tests
       run: |
-        echo "\nFROM python:3.9\nRUN apt-get update\nRUN apt-get install -y git\nRUN git clone https://github.com/kurap1ka00/resource-analyzer.git\nWORKDIR /resource-analyzer\nRUN pip install -r requirements.txt\nCMD ["python3", "./main.py"]">Dockerfile
+        echo "\nFROM python:3.9\nRUN apt-get update\nRUN apt-get install -y git\nRUN git clone https://github.com/kurap1ka00/resource-analyzer.git\nWORKDIR /resource-analyzer\nRUN pip install -r requirements.txt\nCMD ["python3", "./main.py"]">/Dockerfile
 
         docker build -t my-resource-analyzer /
       
