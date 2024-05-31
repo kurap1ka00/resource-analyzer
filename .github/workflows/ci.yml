@@ -27,7 +27,7 @@ jobs:
     - name: Run tests
       run: |
         
-        docker build -t my-resource-analyzer $PWD/resource-analyzer/
+        docker build -t my-resource-analyzer $PWD
       
         docker run -t my-resource-analyzer
           
