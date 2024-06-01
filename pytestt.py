@@ -1,5 +1,5 @@
+import pytest
 
-import psutil
 from incl import SystemMonitor  # Замените на фактический путь к вашему модулю
 
 
