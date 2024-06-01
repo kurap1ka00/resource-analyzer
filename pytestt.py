@@ -6,20 +6,20 @@ import json
 
 @pytest.fixture
 def system_state():
-    return {
-        "memory_usage": 50,
-        "swap_usage": 20,
-        "cpu_usage": 30,
-        "disk_usage": 40
-    }
-
-
+    return {"gpu_memory_usage": 16, "memory_usage": 47, "swap_usage": 4, "cpu_usage": 14, "disk_usage": []}
 
 
 @pytest.fixture
 def system_monitor():
     return SystemMonitor()
 
+
+def test_load_state(system_monitor):
+    ss={}
+    with open("system_state.json","r") as f:
+        json.dump(ss,f)
+    ss1=system_monitor.load_state()
+    assert ss==ss1
 
 def test_get_memory_usage(system_monitor):
     memory_usage = system_monitor.get_memory_usage()
