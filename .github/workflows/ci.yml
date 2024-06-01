@@ -60,4 +60,4 @@ jobs:
 
     - name: Generate artifact attestation
       run: |
-        cosign attest --key ${GITHUB_WORKSPACE}/cosign.key --predicate <(cosign generate <attestation details>)> --type https://in-toto.io/Statement/v0.1 --digest ${{ steps.push.outputs.digest }} --output-file attestation.json
+        cosign attest --key ${GITHUB_WORKSPACE}/cosign.key --predicate <cosign generate <attestation details>> --type https://in-toto.io/Statement/v0.1 --digest ${{ steps.push.outputs.digest }} --output-file attestation.json
