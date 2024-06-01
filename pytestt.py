@@ -1,6 +1,19 @@
 import pytest
 
 from incl import SystemMonitor  # Замените на фактический путь к вашему модулю
+import os
+import json
+
+@pytest.fixture
+def system_state():
+    return {
+        "memory_usage": 50,
+        "swap_usage": 20,
+        "cpu_usage": 30,
+        "disk_usage": 40
+    }
+
+
 
 
 @pytest.fixture
