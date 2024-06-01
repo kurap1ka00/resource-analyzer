@@ -58,6 +58,16 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
+    - name: Install cosign
+      run: |
+        wget https://github.com/sigstore/cosign/releases/download/v1.3.1/cosign-linux-amd64
+        chmod +x cosign-linux-amd64
+        mv cosign-linux-amd64 /usr/local/bin/cosign
+
+    - name: Generate attestation details
+      run: |
+        echo "<attestation details>" > attestation.json
+
     - name: Generate artifact attestation
       run: |
-        cosign attest --key ${GITHUB_WORKSPACE}/cosign.key --predicate <cosign generate <attestation details>> --type https://in-toto.io/Statement/v0.1 --digest ${{ steps.push.outputs.digest }} --output-file attestation.json
+        cosign attest --key ${GITHUB_WORKSPACE}/cosign.key --predicate attestation.json --type https://in-toto.io/Statement/v0.1 --digest ${{ steps.push.outputs.digest }} --output-file attestation.json
