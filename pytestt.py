@@ -28,7 +28,7 @@ def test_load_state(system_monitor):
 def test_save_state(system_monitor):
     ss=system_state()
     ss["gpu_memory_usage"]=52
-    system_monitor.save_state(dbg=1,ss)
+    system_monitor.save_state(dbg=1,state=ss)
     ss1=system_monitor.load_state()
     assert ss["gpu_memory_usage"]==ss1["gpu_memory_usage"]
     assert ss["memory_usage"]==ss1["memory_usage"]
