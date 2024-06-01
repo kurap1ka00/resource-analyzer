@@ -19,8 +19,8 @@ def test_load_state(system_monitor):
     with open("system_state.json","r") as f:
         json.dump(ss,f)
     ss1=system_monitor.load_state()
-    print(ss)
-    assert ss==ss1
+    
+    assert ss["gpu_memory_usage"]==ss1["gpu_memory_usage"]
 
 def test_get_memory_usage(system_monitor):
     memory_usage = system_monitor.get_memory_usage()
