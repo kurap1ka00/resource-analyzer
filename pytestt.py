@@ -4,7 +4,7 @@ from incl import SystemMonitor  # Замените на фактический �
 import os
 import json
 
-@pytest.fixture
+
 def system_state():
     return {"gpu_memory_usage": 16, "memory_usage": 47, "swap_usage": 4, "cpu_usage": 14, "disk_usage": []}
 
