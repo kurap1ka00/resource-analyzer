@@ -19,6 +19,7 @@ def test_load_state(system_monitor):
     with open("system_state.json","r") as f:
         json.dump(ss,f)
     ss1=system_monitor.load_state()
+    print(ss)
     assert ss==ss1
 
 def test_get_memory_usage(system_monitor):
