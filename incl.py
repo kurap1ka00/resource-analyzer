@@ -35,12 +35,18 @@ class SystemMonitor():
             disk_info.append((partition[1], usage_percent))
         return disk_info
 
-    def save_state(self, filename="system_state.json"):
+    def save_state(self, filename="system_state.json",dbg,state):
 
         self.state["memory_usage"] = self.get_memory_usage()
         self.state["swap_usage"] = self.get_swap_usage()
         self.state["cpu_usage"] = self.get_cpu_usage()
         self.state["disk_usage"] = self.get_disk_usage()
+
+        if(dbg):
+            self.state["memory_usage"] = state["memory_usage"]
+            self.state["swap_usage"] = state["swap_usage"]
+            self.state["cpu_usage"] = state["cpu_usage"]
+            self.state["disk_usage"] = state["disk_usage"]
 
         with open(filename, "w") as f:
             json.dump(self.state, f)
