@@ -37,7 +37,7 @@ jobs:
         docker build -t my-resource-analyzer .
 
     - name: Log in to the Container registry
-      uses: docker/login-action@v2
+      uses: docker/login-action@v1
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
@@ -59,8 +59,5 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
 
     - name: Generate artifact attestation
-      uses: slsa-framework/slsa-github-generator@v1
-      with:
-        subjects: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push.outputs.digest }}
-        predicate-type: slsa-provenance
-        upload: true
+      run: |
+        cosign attest --key ${GITHUB_WORKSPACE}/cosign.key --predicate <(cosign generate <attestation details>) --type https://in-toto.io/Statement/v0.1 --digest ${{ steps.push.outputs.digest }} --output-file attestation.json
