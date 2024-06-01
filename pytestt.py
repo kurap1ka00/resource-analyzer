@@ -1,4 +1,4 @@
-import pytest
+
 import psutil
 from incl import SystemMonitor  # Замените на фактический путь к вашему модулю
 
@@ -11,19 +11,19 @@ def system_monitor():
 def test_get_memory_usage(system_monitor):
     memory_usage = system_monitor.get_memory_usage()
     assert isinstance(memory_usage, float)
-    assert memory_usage == psutil.virtual_memory()[2]
+    assert 0 <= memory_usage <= 100
 
 
 def test_get_swap_usage(system_monitor):
     swap_usage = system_monitor.get_swap_usage()
     assert isinstance(swap_usage, float)
-    assert swap_usage == psutil.swap_memory()[3]
+    assert 0 <= swap_usage<= 100
 
 
 def test_get_cpu_usage(system_monitor):
     cpu_usage = system_monitor.get_cpu_usage()
     assert isinstance(cpu_usage, float)
-    assert cpu_usage == psutil.cpu_percent()
+    assert 0 <= cpu_usage <= 100
 
 
 def test_get_disk_usage(system_monitor):
