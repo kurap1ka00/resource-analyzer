@@ -27,10 +27,10 @@ def test_load_state(system_monitor):
 
 def test_save_state(system_monitor):
     ss=system_state()
-    ss["gpu_memory_usage"]=52
+    ss["memory_usage"]=52
     system_monitor.save_state(dbg=True,state=ss)
     ss1=system_monitor.load_state()
-    assert ss["gpu_memory_usage"]==ss1["memory_usage"]
+    assert ss["memory_usage"]==ss1["memory_usage"]
     assert ss["memory_usage"]==ss1["memory_usage"]
     assert ss["swap_usage"]==ss1["swap_usage"]
     assert ss["cpu_usage"]==ss1["cpu_usage"]
