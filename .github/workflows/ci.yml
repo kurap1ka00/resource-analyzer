@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request, issue_comment]
+on: [push, pull_request]
 
 env:
   REGISTRY: ghcr.io
