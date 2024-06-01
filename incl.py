@@ -53,6 +53,7 @@ class SystemMonitor():
             print(f"State loaded from {filename}")
         except FileNotFoundError:
             print(f"File {filename} not found. No state loaded.")
+        return self.state
 
     def display_ret_info(self, filename):
         self.load_state(filename=filename)
